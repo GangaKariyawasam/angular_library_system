@@ -1,5 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Card} from '../../model/Card';
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
+import {addFontsToIndex} from "@angular/material/schematics/ng-add/fonts/material-fonts";
 
 @Component({
   selector: 'app-search-result',
@@ -10,24 +14,20 @@ import {Card} from '../../model/Card';
 export class SearchResultComponent implements OnInit{
 
   cards: Card[] = [];
-  cardLength: number = 0;
 
   constructor() { }
 
 
   ngOnInit(): void {
-    this.cards.push({title: 'Madolduwa', subtitle: 'Martin wickramasinghe', text: 'This is a sample test',image:'https://material.angular.io/assets/img/examples/shiba1.jpg'});
-    this.cards.push({title: 'Gamperaliya', subtitle: 'Martin wickramasinghe', text: 'This is a sample test',image:'https://post.healthline.com/wp-content/uploads/2020/08/edible-flowers-732x549-thumbnail.jpg'});
-    this.cards.push({title: 'Yuganthaya', subtitle: 'Martin wickramasinghe', text: 'This is a sample test', image:'https://material.angular.io/assets/img/examples/shiba1.jpg'});
-    this.cards.push({title: 'Kaliyugaya', subtitle: 'Martin wickramasinghe', text: 'This is a sample test', image:'https://material.angular.io/assets/img/examples/shiba1.jpg'});
-    this.cards.push({title: 'Kaliyugaya', subtitle: 'Martin wickramasinghe', text: 'This is a sample test', image:'https://material.angular.io/assets/img/examples/shiba1.jpg'});
-    this.cards.push({title: 'Kaliyugaya', subtitle: 'Martin wickramasinghe', text: 'This is a sample test', image:'https://material.angular.io/assets/img/examples/shiba1.jpg'});
-    this.cards.push({title: 'Kaliyugaya', subtitle: 'Martin wickramasinghe', text: 'This is a sample test', image:'https://material.angular.io/assets/img/examples/shiba1.jpg'});
-    this.cards.push({title: 'Kaliyugaya', subtitle: 'Martin wickramasinghe', text: 'This is a sample test', image:'https://material.angular.io/assets/img/examples/shiba1.jpg'});
-    this.cards.push({title: 'Kaliyugayaaaaaaaaaaaaaaaaaaaaaaaaaaa', subtitle: 'Martin wickramasinghe', text: 'This is a sample test', image:'https://material.angular.io/assets/img/examples/shiba1.jpg'});
-
-    this.cardLength = this.cards.length;
+    for (let i=0; i<10; i++){
+      this.cards.push({refNo:'12345', barcode:'456321', englishName:'Kaliyugaya', sinhalaName:'කලියුගය', year:1995
+        ,price:1800.25, medium:'Sinhala', pages:800, image:'hhhh', note:'lorem ipsum', author:'Martin Wickramasinghe',
+        category:'Nawa Katha', isReference:false, supplier:'Government', rack:'1A'});
+    }
   }
 
+  changePage(event: PageEvent) {
+
+  }
 }
 

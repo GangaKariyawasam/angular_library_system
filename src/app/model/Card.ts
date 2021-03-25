@@ -1,6 +1,17 @@
 export interface Card {
-  image?: string;
-  title: string;
-  subtitle: string;
-  text: string;
+  refNo: string,
+  barcode: string,
+  englishName: string,
+  sinhalaName: string,
+  year: number,
+  price: any,
+  medium: string,
+  pages: number,
+  note: string,
+  author: string,
+  category: string,
+  isReference: boolean,
+  supplier: string,
+  rack: string,
+  image: any
 }
