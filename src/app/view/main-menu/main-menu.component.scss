@@ -1,0 +1,45 @@
+table {
+  width: 100%;
+}
+.formSection{
+  position: relative;
+  height: 100%;
+  margin: 0 30px 30px 20px;
+  border-radius: 20px 0 0 20px;
+}
+.btn-select-course{
+  height: 40px;
+  width: 100px;
+  margin: 0 10px;
+}
+.selected-courses{
+  border: 1px solid black;
+  margin-bottom: 20px;
+}
+.btn-register{
+  border-radius: 50px;
+  background-color: lawngreen;
+  font-size: 18px;
+  font-weight: 800;
+  box-shadow: 5px 5px 5px 2px darkseagreen;
+}
+.searchSection{
+  font-size: 14px;
+}
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline{
+  box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
+  border-radius: 50px;
+}
+::ng-deep div.mat-form-field-outline-start {
+
+  border-width: 0px !important;
+}
+
+::ng-deep .mat-form-field-outline-gap{
+  border-width: 0px !important;
+}
+
+::ng-deep .mat-form-field-outline-end{
+  border-width: 0px !important;
+}
+

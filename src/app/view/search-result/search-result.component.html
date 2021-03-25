@@ -1,0 +1,53 @@
+<div class="content">
+  <div class="row" >
+  <div class="col-12">
+    <div class="row pl-5"style="text-align:left;">
+      <div class="col-12">
+        <h3 >Your search returnd {{cardLength}} Results</h3>
+      </div>
+    </div>
+      <div class="row">
+          <div class="col-12 col-md-6" *ngFor="let card Of cards">
+            <mat-card class="matCard">
+                <div class="row">
+                  <div class="col-12 col-md-3">
+                    <div class="cardImage img-fluid" [ngStyle]="{background: 'url('+card.image+')',backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}"></div>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <div class="row">
+                      <div class="col-12">
+                        <mat-card-title>{{card.title}}</mat-card-title>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <mat-card-subtitle>{{card.subtitle}}</mat-card-subtitle>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <p>{{card.text}}</p>
+                      </div>
+                    </div>
+                </div>
+                </div>
+             <div class="row">
+              <div class="col-12">
+                <mat-card-content>
+                  <p>ipsan Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque doloribus earum fugiat fugit harum hic incidunt laborum, minus modi, natus praesentium sit temporibus unde ut veniam veritatis voluptate voluptates.</p>
+                </mat-card-content>
+              </div>
+             </div>
+              <mat-card-actions>
+                <button mat-button>Place hold</button>
+                <button mat-button>Add to your cart</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+      </div>
+  </div>
+  </div>
+</div>
+
+
+<mat-paginator [length]="cardLength" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

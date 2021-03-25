@@ -1,0 +1,99 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 content"style="padding:0;margin:0;">
+      <!--Navbar-->
+      <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark green" [containerInside]="false">
+
+        <!-- Navbar brand -->
+        <mdb-navbar-brand><a class="navbar-brand" href="#">Finetech</a></mdb-navbar-brand>
+
+        <!-- Collapsible content -->
+        <links>
+
+          <!-- Links -->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" mdbWavesEffect><mdb-icon fas icon="user-graduate"></mdb-icon> Students</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="book"></mdb-icon>Courses</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="envelope"></mdb-icon> Contact<span class="sr-only">(current)</span></a>
+            </li>
+            <!-- Dropdown -->
+            <li class="nav-item dropdown" dropdown>
+              <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                <mdb-icon fas icon="user"></mdb-icon> Profile<span class="caret"></span></a>
+              <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+                <a class="dropdown-item waves-light" mdbWavesEffect href="#">My account</a>
+                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
+              </div>
+            </li>
+
+          </ul>
+          <!-- Links -->
+        </links>
+        <!-- Collapsible content -->
+
+      </mdb-navbar>
+      <!--/.Navbar-->
+    </div>
+  </div>
+  <div class="row d-flex">
+    <div class="col-12 col-md-8">
+      <div class="row mt-3 mb-3 searchSection">
+        <div class="col-12">
+          <mat-form-field appearance="outline" [style.width.%]=20>
+            <select matNativeControl name="section">
+              <option>Test</option>
+            </select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" [style.width.%]=80>
+           <!-- <mat-label>Search</mat-label>-->
+            <input class="searchBox" matInput placeholder="Martin Wickramasinghe">
+            <mat-icon matPrefix>search</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12" style="height:70vh;background-color: blue">
+          <app-search-result></app-search-result>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4 mt-0 mt-md-5"style="background-color: red">
+      <div class="row">
+        <div class="col-12 justify-content-center d-flex">
+          <h2 >LOGIN</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <mat-form-field appearance="fill" [style.width.%]=75>
+            <mat-label>Username</mat-label>
+            <input matInput>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <mat-form-field appearance="fill" [style.width.%]=75>
+            <mat-label>password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center mb-5">
+          <button mat-stroked-button class="btn-block btn-register button" [style.width.%]=50>Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+
+

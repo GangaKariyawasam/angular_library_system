@@ -1,0 +1,19 @@
+
+//.example-header-image {
+//  //background-image: url();
+//  background-size: cover;
+//}
+mat-card{
+  margin: 10px;
+  background-color:darkseagreen;
+  overflow: hidden;
+}
+.matCard img{
+  background-size: contain;
+}
+.cardImage{
+  width: 120px;
+  height: 120px;
+  border: 3px solid black;
+  border-radius: 50%;
+}
