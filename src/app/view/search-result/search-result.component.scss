@@ -17,3 +17,22 @@ mat-card{
   border: 3px solid black;
   border-radius: 50%;
 }
+.searchSection{
+  font-size: 14px;
+}
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline{
+  box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
+  border-radius: 50px;
+}
+::ng-deep div.mat-form-field-outline-start {
+
+  border-width: 0px !important;
+}
+
+::ng-deep .mat-form-field-outline-gap{
+  border-width: 0px !important;
+}
+
+::ng-deep .mat-form-field-outline-end{
+  border-width: 0px !important;
+}

@@ -27,6 +27,8 @@ import { SearchResultComponent } from './view/search-result/search-result.compon
 import {MatCardModule} from '@angular/material/card';
 import {AppRouterModule} from './app.router.module';
 import { FooterComponent } from './view/footer/footer.component';
+import {BookService} from "./service/book.service";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -61,8 +63,9 @@ import { FooterComponent } from './view/footer/footer.component';
     MatCardModule,
     AppRouterModule,
     MatDialogModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [BookService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [RegistrationComponent]
