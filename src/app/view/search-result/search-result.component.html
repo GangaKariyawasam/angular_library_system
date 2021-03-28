@@ -4,23 +4,56 @@
     <div class="row mt-3 mb-3 searchSection">
         <div class="col-12">
         <mat-form-field appearance="outline" [style.width.%]=20>
-        <select matNativeControl name="section">
-          <option>Test</option>
+        <select class="search-font" matNativeControl name="section" [(ngModel)]="selectedOption" (click)="searchTypeSelect()">
+          <option value="title">Title</option>
+          <option value="author">Author</option>
+          <option value="category">Category</option>
         </select>
         </mat-form-field>
         <mat-form-field appearance="outline" [style.width.%]=80>
        <!-- <mat-label>Search</mat-label>-->
-        <input class="searchBox" matInput placeholder="Martin Wickramasinghe" #search (keyup.enter)="searchBook(search.value,'5','0')">
+        <input class="searchBox search-font" matInput placeholder="Martin Wickramasinghe"
+               #search (keyup.enter)="searchBook(search.value,'5','0')" (keyup)="clearSearch(search.value)">
         <mat-icon matPrefix>search</mat-icon>
         </mat-form-field>
         </div>
     </div>
-    <div class="row pl-5"style="text-align:left;">
+   <!-- <div *ngIf="!showResultCount" class="row d-flex justify-content-center">
+          <div class="col-11 carousal-section">
+              <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+                  <mdb-carousel-item>
+                      <video class="video-fluid" autoplay loop muted>
+                          <source src="https://mdbootstrap.com/img/video/Tropical.mp4" type="video/mp4" />
+                      </video>
+                  </mdb-carousel-item>
+                  <mdb-carousel-item>
+                      <video class="video-fluid" autoplay loop muted>
+                          <source src="https://mdbootstrap.com/img/video/forest.mp4" type="video/mp4" />
+                      </video>
+                  </mdb-carousel-item>
+                  <mdb-carousel-item>
+                      <video class="video-fluid" autoplay loop muted>
+                          <source src="https://mdbootstrap.com/img/video/Agua-natural.mp4" type="video/mp4" />
+                      </video>
+                  </mdb-carousel-item>
+                  <mdb-carousel-item>
+                      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(68).jpg" alt="First slide">
+                  </mdb-carousel-item>
+                  <mdb-carousel-item>
+                      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(6).jpg" alt="Second slide">
+                  </mdb-carousel-item>
+                  <mdb-carousel-item>
+                      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(9).jpg" alt="Third slide">
+                  </mdb-carousel-item>
+              </mdb-carousel>
+          </div>
+      </div>-->
+    <div *ngIf="showResultCount" class="row pl-5">
       <div class="col-12">
-        <h3 >Your search returnd {{cards.length}} Results</h3>
+        <h3>Your search returnd {{resultCount}} Results</h3>
       </div>
     </div>
-      <div class="row">
+    <div class="row">
           <div class="col-12" *ngFor="let card Of cards">
             <mat-card class="matCard">
                 <div class="row">
@@ -30,12 +63,7 @@
                   <div class="col-12 col-md-10">
                     <div class="row">
                       <div class="col-12">
-                        <mat-card-title>{{card.englishName}}</mat-card-title>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-12">
-                        <mat-card-subtitle>{{card.sinhalaName}}</mat-card-subtitle>
+                        <mat-card-title>{{card.englishName}} | {{card.sinhalaName}}</mat-card-title>
                       </div>
                     </div>
                     <div class="row">
@@ -59,9 +87,11 @@
             </mat-card>
           </div>
       </div>
+    <div *ngIf="showResultCount" class="row">
+          <div class="col-12">
+              <mat-paginator showFirstLastButtons [length]="resultCount" [pageSize]="5" [pageSizeOptions]="[5]" (page)="changePage($event)"></mat-paginator>
+          </div>
+      </div>
   </div>
   </div>
 </div>
-
-
-<mat-paginator [pageSize]="5" [pageSizeOptions]="[5]" (page)="changePage($event)"></mat-paginator>
