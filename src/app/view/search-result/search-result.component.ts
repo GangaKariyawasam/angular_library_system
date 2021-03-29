@@ -1,10 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {BookCustom} from '../../model/BookCustom';
-import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {MatSort} from "@angular/material/sort";
-import {addFontsToIndex} from "@angular/material/schematics/ng-add/fonts/material-fonts";
 import {BookService} from "../../service/book.service";
+import {LoaderService} from "../../service/loader.service";
 
 @Component({
   selector: 'app-search-result',
@@ -20,8 +18,11 @@ export class SearchResultComponent implements OnInit{
   selectedOption = 'title';
   @ViewChild('search')
   searchValue!: ElementRef;
+  @ViewChild('paginator')
+  paginator!: MatPaginator;
+  panelOpenState = false;
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService,public loaderService: LoaderService) { }
 
 
   ngOnInit(): void {
@@ -34,24 +35,24 @@ export class SearchResultComponent implements OnInit{
         this.showResultCount = true;
         this.cards = list;
       }, error => {
-        alert('Something went wrong');
+        alert(error);
       })
       this.bookService.searchBookCountByName(searchKey).subscribe(count => {
         this.resultCount = count;
       }, error => {
-        alert('Something went wrong');
+        alert(error);
       });
     }else if(this.selectedOption === 'author'){
       this.bookService.searchBookByAuthor(searchKey,pageSize,pageIndex).subscribe(list => {
         this.showResultCount = true;
         this.cards = list;
       }, error => {
-        alert('Something went wrong');
+        alert(error);
       });
       this.bookService.searchBookCountByAuthor(searchKey).subscribe(count => {
         this.resultCount = count;
       }, error => {
-        alert('Something went wrong');
+        alert(error);
       });
     }else {
 
@@ -59,7 +60,8 @@ export class SearchResultComponent implements OnInit{
   }
 
   changePage(event: PageEvent) {
-
+    this.searchBook((this.searchValue.nativeElement as HTMLInputElement).value
+        ,event.pageSize.toString(),event.pageIndex.toString())
   }
 
   clearSearch(value: string) {
@@ -71,8 +73,14 @@ export class SearchResultComponent implements OnInit{
 
   searchTypeSelect() {
     if((this.searchValue.nativeElement as HTMLInputElement).value !== ''){
+      this.paginator.firstPage();
       this.searchBook((this.searchValue.nativeElement as HTMLInputElement).value,'5','0');
     }
+  }
+
+  onSearchCloseButton() {
+    (this.searchValue.nativeElement as HTMLInputElement).value = '';
+    this.clearSearch((this.searchValue.nativeElement as HTMLInputElement).value);
   }
 }
 

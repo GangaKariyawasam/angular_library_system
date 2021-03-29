@@ -1,4 +1,12 @@
 <div class="content">
+    <div *ngIf="loaderService.isLoading | async" class="row">
+        <div class="col-12 loader-container">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+    </div>
+    <div *ngIf="loaderService.isLoading | async" class="loader-spinner">
+        <mat-spinner style="top: 50%; left: 50%"></mat-spinner>
+    </div>
   <div class="row" >
   <div class="col-12">
     <div class="row mt-3 mb-3 searchSection">
@@ -11,7 +19,9 @@
         </select>
         </mat-form-field>
         <mat-form-field appearance="outline" [style.width.%]=80>
-       <!-- <mat-label>Search</mat-label>-->
+        <button mat-button *ngIf="search.value" matSuffix mat-icon-button aria-label="Clear" (click)="onSearchCloseButton()">
+            <mat-icon>close</mat-icon>
+        </button>
         <input class="searchBox search-font" matInput placeholder="Martin Wickramasinghe"
                #search (keyup.enter)="searchBook(search.value,'5','0')" (keyup)="clearSearch(search.value)">
         <mat-icon matPrefix>search</mat-icon>
@@ -56,19 +66,77 @@
     <div class="row">
           <div class="col-12" *ngFor="let card Of cards">
             <mat-card class="matCard">
+                <div *ngIf="card.reference" class="row d-flex justify-content-end align-items-start">
+                    <div>
+                        <mat-icon>lock</mat-icon>
+                    </div>
+                </div>
                 <div class="row">
                   <div class="col-12 col-md-2">
-                    <div class="cardImage img-fluid" [ngStyle]="{background: 'url('+card.image+')',backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}"></div>
+                    <div class="cardImage img-fluid" [ngStyle]="(card.image!==null)?{background: 'url(http://localhost:8080/api/v1/books/image/'+card.bookId+')',backgroundSize: 'cover',backgroundRepeat: 'no-repeat'}:{}"></div>
                   </div>
                   <div class="col-12 col-md-10">
                     <div class="row">
-                      <div class="col-12">
-                        <mat-card-title>{{card.englishName}} | {{card.sinhalaName}}</mat-card-title>
+                      <div class="col-12 d-flex justify-content-between">
+                        <mat-card-title class="text-bold">{{card.englishName}} | {{card.sinhalaName}} ({{card.year}})</mat-card-title>
+                        <mat-card-title>RS.{{card.price}}</mat-card-title>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-12">
-                        <p>{{card.note}}</p>
+                        <h5>{{card.author.name}}</h5>
+                      <mat-accordion class="example-headers-align" multi>
+                          <mat-expansion-panel (opened)="panelOpenState = true"
+                                               (closed)="panelOpenState = false">
+                              <mat-expansion-panel-header>
+                                  <mat-panel-title>
+                                      {{panelOpenState?'Hide Details':'Show More Details'}}
+                                  </mat-panel-title>
+                                  <mat-panel-description>
+                                      <mat-icon>description</mat-icon>
+                                  </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <div class="row">
+                                  <div class="col-12 d-flex align-items-center">
+                                      <div class="book-details">
+                                          <span>pages:</span> {{card.pages}} |
+                                          <span>medium:</span> {{card.medium.toLowerCase()}} |
+                                          <span>supplier:</span> {{card.supplier.name.toLowerCase()}} |
+                                          <span>rack:</span> {{card.rackNo.rackNo}}-{{card.rackNo.shellNo}} |
+                                          <span>categories:</span>
+                                      </div>
+                                      <div>
+                                          <mat-chip-list
+                                                  class="example-chip"
+                                                  cdkDropList
+                                                  cdkDropListOrientation="horizontal">
+                                              <mat-chip
+                                                      class="example-box"
+                                                      cdkDrag
+                                                      *ngFor="let category of card.categories">
+                                                  {{category.name}}
+                                              </mat-chip>
+                                          </mat-chip-list>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-12 book-details">
+                                      <span>reference number:</span> {{card.refNo}} |
+                                      <span>book id:</span> {{card.bookId}} |
+                                      <span>barcode:</span> {{card.barcode}}
+                                  </div>
+                              </div>
+                          </mat-expansion-panel>
+                      </mat-accordion>
+                        <div class="row m-2">
+                            <div class="col-12 d-flex align-items-center">
+                                <div [ngClass]="card.available===true?'available-indicator':'not-available-indicator'"></div>
+                                <span class="ml-1 mr-3"> {{card.available===true?'Available':'Not available'}}</span>
+                                <div *ngIf="card.reference" class="reference-only-indicator"></div>
+                                <span *ngIf="card.reference" class="ml-1">Reference Only</span>
+                            </div>
+                        </div>
                       </div>
                     </div>
                 </div>
@@ -76,20 +144,29 @@
              <div class="row">
               <div class="col-12">
                 <mat-card-content>
-                  <p>ipsan Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque doloribus earum fugiat fugit harum hic incidunt laborum, minus modi, natus praesentium sit temporibus unde ut veniam veritatis voluptate voluptates.</p>
+                  <div class="book-description">
+                      {{card.note}}ipsan Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque doloribus earum fugiat fugit harum hic incidunt laborum, minus modi, natus praesentium sit temporibus unde ut veniam veritatis voluptate voluptates.
+                      {{card.note}}ipsan Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque doloribus earum fugiat fugit harum hic incidunt laborum, minus modi, natus praesentium sit temporibus unde ut veniam veritatis voluptate voluptates.
+                      {{card.note}}ipsan Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque doloribus earum fugiat fugit harum hic incidunt laborum, minus modi, natus praesentium sit temporibus unde ut veniam veritatis voluptate voluptates.
+                      {{card.note}}ipsan Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque doloribus earum fugiat fugit harum hic incidunt laborum, minus modi, natus praesentium sit temporibus unde ut veniam veritatis voluptate voluptates.
+                      {{card.note}}ipsan Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque doloribus earum fugiat fugit harum hic incidunt laborum, minus modi, natus praesentium sit temporibus unde ut veniam veritatis voluptate voluptates.
+                  </div>
                 </mat-card-content>
               </div>
              </div>
+            <mat-divider *ngIf="!card.reference"></mat-divider>
               <mat-card-actions>
-                <button mat-button>Place hold</button>
-                <button mat-button>Add to your cart</button>
+                <div class="d-flex align-items-center ml-3">
+                    <mat-icon *ngIf="!card.reference">shopping_cart</mat-icon>
+                    <button class="text-bold" mat-button *ngIf="!card.reference">Add to cart</button>
+                </div>
               </mat-card-actions>
             </mat-card>
           </div>
       </div>
     <div *ngIf="showResultCount" class="row">
           <div class="col-12">
-              <mat-paginator showFirstLastButtons [length]="resultCount" [pageSize]="5" [pageSizeOptions]="[5]" (page)="changePage($event)"></mat-paginator>
+              <mat-paginator #paginator showFirstLastButtons [length]="resultCount" [pageSize]="5" [pageSizeOptions]="[5]" (page)="changePage($event)"></mat-paginator>
           </div>
       </div>
   </div>

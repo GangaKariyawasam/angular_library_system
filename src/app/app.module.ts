@@ -28,7 +28,12 @@ import {MatCardModule} from '@angular/material/card';
 import {AppRouterModule} from './app.router.module';
 import { FooterComponent } from './view/footer/footer.component';
 import {BookService} from "./service/book.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {InterceptorService} from "./service/interceptor.service";
 
 
 @NgModule({
@@ -64,8 +69,12 @@ import {HttpClientModule} from "@angular/common/http";
     AppRouterModule,
     MatDialogModule,
     HttpClientModule,
+    MatChipsModule,
+    MatExpansionModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
   ],
-  providers: [BookService],
+  providers: [BookService,{provide: HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [RegistrationComponent]
