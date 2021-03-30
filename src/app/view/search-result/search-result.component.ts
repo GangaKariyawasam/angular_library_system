@@ -1,8 +1,10 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {BookCustom} from '../../model/BookCustom';
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {BookService} from "../../service/book.service";
 import {LoaderService} from "../../service/loader.service";
+import Swal from "sweetalert2";
+import {ConfigService} from "../../service/config.service";
 
 @Component({
   selector: 'app-search-result',
@@ -22,7 +24,8 @@ export class SearchResultComponent implements OnInit{
   paginator!: MatPaginator;
   panelOpenState = false;
 
-  constructor(private bookService: BookService,public loaderService: LoaderService) { }
+  constructor(private bookService: BookService,public loaderService: LoaderService,
+              private config: ConfigService) { }
 
 
   ngOnInit(): void {
@@ -35,24 +38,40 @@ export class SearchResultComponent implements OnInit{
         this.showResultCount = true;
         this.cards = list;
       }, error => {
-        alert(error);
+        this.config.toastMixin.fire({
+          icon: "error",
+          animation: true,
+          title: 'Failed to load searched data'
+        });
       })
       this.bookService.searchBookCountByName(searchKey).subscribe(count => {
         this.resultCount = count;
       }, error => {
-        alert(error);
+        this.config.toastMixin.fire({
+          icon: "error",
+          animation: true,
+          title: 'Failed to load search count'
+        });
       });
     }else if(this.selectedOption === 'author'){
       this.bookService.searchBookByAuthor(searchKey,pageSize,pageIndex).subscribe(list => {
         this.showResultCount = true;
         this.cards = list;
       }, error => {
-        alert(error);
+        this.config.toastMixin.fire({
+          icon: "error",
+          animation: true,
+          title: 'Failed to load searched data'
+        });
       });
       this.bookService.searchBookCountByAuthor(searchKey).subscribe(count => {
         this.resultCount = count;
       }, error => {
-        alert(error);
+        this.config.toastMixin.fire({
+          icon: "error",
+          animation: true,
+          title: 'Failed to load search count'
+        });
       });
     }else {
 

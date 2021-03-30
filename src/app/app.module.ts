@@ -34,6 +34,8 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {InterceptorService} from "./service/interceptor.service";
+import { HighlightSearchPipe } from './pipes/highlight-search.pipe';
+import { StudentProfileComponent } from './view/student-profile/student-profile.component';
 
 
 @NgModule({
@@ -46,6 +48,8 @@ import {InterceptorService} from "./service/interceptor.service";
     StudentRegisterComponent,
     SearchResultComponent,
     FooterComponent,
+    HighlightSearchPipe,
+    StudentProfileComponent,
   ],
   imports: [
     BrowserModule,

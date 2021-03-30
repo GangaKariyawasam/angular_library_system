@@ -28,7 +28,7 @@
         </mat-form-field>
         </div>
     </div>
-   <!-- <div *ngIf="!showResultCount" class="row d-flex justify-content-center">
+    <div *ngIf="!showResultCount" class="row d-flex justify-content-center">
           <div class="col-11 carousal-section">
               <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
                   <mdb-carousel-item>
@@ -57,7 +57,7 @@
                   </mdb-carousel-item>
               </mdb-carousel>
           </div>
-      </div>-->
+      </div>
     <div *ngIf="showResultCount" class="row pl-5">
       <div class="col-12">
         <h3>Your search returnd {{resultCount}} Results</h3>
@@ -78,13 +78,17 @@
                   <div class="col-12 col-md-10">
                     <div class="row">
                       <div class="col-12 d-flex justify-content-between">
-                        <mat-card-title class="text-bold">{{card.englishName}} | {{card.sinhalaName}} ({{card.year}})</mat-card-title>
+                        <mat-card-title class="d-flex">
+                            <p [innerHTML]="selectedOption=='title'?(card.englishName | highlightSearch: searchValue.nativeElement.value):(card.englishName)" class="text-bold"></p><p class="ml-2 mr-2">|</p>
+                            <p [innerHTML]="selectedOption=='title'?(card.sinhalaName | highlightSearch: searchValue.nativeElement.value):(card.sinhalaName)" class="text-bold"></p><p class="ml-2">(</p>
+                            <p [innerHTML]="card.year" class="text-bold"></p><p>)</p>
+                        </mat-card-title>
                         <mat-card-title>RS.{{card.price}}</mat-card-title>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-12">
-                        <h5>{{card.author.name}}</h5>
+                        <h5 [innerHTML]="selectedOption=='author'?(card.author.name | highlightSearch: searchValue.nativeElement.value):(card.author.name)"></h5>
                       <mat-accordion class="example-headers-align" multi>
                           <mat-expansion-panel (opened)="panelOpenState = true"
                                                (closed)="panelOpenState = false">
@@ -102,10 +106,14 @@
                                           <span>pages:</span> {{card.pages}} |
                                           <span>medium:</span> {{card.medium.toLowerCase()}} |
                                           <span>supplier:</span> {{card.supplier.name.toLowerCase()}} |
-                                          <span>rack:</span> {{card.rackNo.rackNo}}-{{card.rackNo.shellNo}} |
-                                          <span>categories:</span>
+                                          <span>rack:</span> {{card.rackNo.rackNo}}-{{card.rackNo.shellNo}}
                                       </div>
-                                      <div>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-12">
+                                      <div class="d-flex align-items-center book-details">
+                                          <span>categories:</span>
                                           <mat-chip-list
                                                   class="example-chip"
                                                   cdkDropList

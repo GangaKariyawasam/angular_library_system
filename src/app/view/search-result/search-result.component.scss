@@ -24,6 +24,7 @@ mat-card{
   box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
   border-radius: 50px;
 }
+
 ::ng-deep div.mat-form-field-outline-start {
 
   border-width: 0px !important;
@@ -95,7 +96,7 @@ mat-card{
   position: absolute;
   height: 100%;
   width: 100%;
-  background: black;
+  background: white;
   opacity: 0.8;
   z-index: 999;
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpErrorResponse} from "@angular/common/http";
 import {throwError} from "rxjs";
+import Swal from "sweetalert2";
 
 @Injectable({
   providedIn: 'root'
@@ -27,4 +28,19 @@ export class ConfigService {
     return throwError(
         'Something bad happened; please try again later.');
   }
+
+  toastMixin = Swal.mixin({
+    toast: true,
+    icon: "success",
+    title: 'General Title',
+    animation: true,
+    position: 'top-right',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });
 }

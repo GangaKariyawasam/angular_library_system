@@ -8,6 +8,7 @@ import {SearchResultComponent} from './view/search-result/search-result.componen
 import {StudentRegisterComponent} from './view/student-register/student-register.component';
 import {DashBoardComponent} from './view/dash-board/dash-board.component';
 import {FooterComponent} from "./view/footer/footer.component";
+import {StudentProfileComponent} from "./view/student-profile/student-profile.component";
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     component: StudentRegisterComponent,
     path: 'student-register'
+  },
+  {
+    component: StudentProfileComponent,
+    path: 'student-profile'
   },
   {
     component: DashBoardComponent,
