@@ -36,6 +36,7 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {InterceptorService} from "./service/interceptor.service";
 import { HighlightSearchPipe } from './pipes/highlight-search.pipe';
 import { StudentProfileComponent } from './view/student-profile/student-profile.component';
+import {TokenInterceptorService} from "./service/token-interceptor.service";
 
 
 @NgModule({
@@ -78,7 +79,18 @@ import { StudentProfileComponent } from './view/student-profile/student-profile.
     MatProgressSpinnerModule,
     MatProgressBarModule,
   ],
-  providers: [BookService,{provide: HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}],
+  providers: [BookService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass:InterceptorService,
+      multi:true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass:TokenInterceptorService,
+      multi:true
+    },
+    ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [RegistrationComponent]

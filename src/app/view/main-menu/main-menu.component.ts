@@ -11,7 +11,7 @@ import {ConfigService} from "../../service/config.service";
   templateUrl: './main-menu.component.html',
   styleUrls: ['./main-menu.component.scss']
 })
-export class MainMenuComponent{
+export class MainMenuComponent implements OnInit{
 
   @ViewChild('frm')
   frm!: FormGroup;
@@ -41,10 +41,10 @@ export class MainMenuComponent{
   submitFormData(username:string, password:string): void {
     if(this.form.valid){
       this.userService.authenticate(username, password).subscribe(value => {
-        sessionStorage.setItem(`token`,value);
-        sessionStorage.setItem(`uname`,username);
+        localStorage.setItem(`token`,value);
         this.userService.getUser().subscribe(user => {
-          if(user.toLowerCase().equals('admin')){
+          localStorage.setItem(`role`,user.role.toLowerCase());
+          if(user.username.toLowerCase()==='admin'){
             this.router.navigateByUrl('/dash-board');
           }else {
             this.router.navigateByUrl('/student-profile');

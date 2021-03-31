@@ -9,6 +9,9 @@ import {StudentRegisterComponent} from './view/student-register/student-register
 import {DashBoardComponent} from './view/dash-board/dash-board.component';
 import {FooterComponent} from "./view/footer/footer.component";
 import {StudentProfileComponent} from "./view/student-profile/student-profile.component";
+import {MainMenuGuard} from "./guards/main-menu.guard";
+import {DashboardGuard} from "./guards/dashboard.guard";
+import {StudentProfileGuard} from "./guards/student-profile.guard";
 
 const routes: Routes = [
   {
@@ -18,7 +21,8 @@ const routes: Routes = [
   },
   {
     component: MainMenuComponent,
-    path: 'main'
+    path: 'main',
+    canActivate: [MainMenuGuard]
   },
   {
     component: CoursesComponent,
@@ -42,11 +46,13 @@ const routes: Routes = [
   },
   {
     component: StudentProfileComponent,
-    path: 'student-profile'
+    path: 'student-profile',
+    canActivate: [StudentProfileGuard]
   },
   {
     component: DashBoardComponent,
-    path: 'dash-board'
+    path: 'dash-board',
+    canActivate: [DashboardGuard]
   },
   {
     component: FooterComponent,
