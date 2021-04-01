@@ -31,12 +31,15 @@ import {BookService} from "./service/book.service";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatExpansionModule} from "@angular/material/expansion";
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {InterceptorService} from "./service/interceptor.service";
 import { HighlightSearchPipe } from './pipes/highlight-search.pipe';
 import { StudentProfileComponent } from './view/student-profile/student-profile.component';
 import {TokenInterceptorService} from "./service/token-interceptor.service";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { DashBoardComponent } from './view/dash-board/dash-board.component';
+import { HomeComponent } from './view/dash-board/home/home.component';
+import { StudentComponent } from './view/dash-board/student/student.component';
 
 
 @NgModule({
@@ -51,6 +54,9 @@ import {TokenInterceptorService} from "./service/token-interceptor.service";
     FooterComponent,
     HighlightSearchPipe,
     StudentProfileComponent,
+    DashBoardComponent,
+    HomeComponent,
+    StudentComponent,
   ],
   imports: [
     BrowserModule,

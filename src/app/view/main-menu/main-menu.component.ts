@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/
 import {UserService} from "../../service/user.service";
 import {Router} from "@angular/router";
 import {ConfigService} from "../../service/config.service";
+import {LoaderService} from "../../service/loader.service";
 
 @Component({
   selector: 'app-main-menu',
@@ -23,7 +24,8 @@ export class MainMenuComponent implements OnInit{
     constructor(private fb: FormBuilder
                 ,private userService: UserService
                 ,private router: Router
-                ,private config: ConfigService) {
+                ,private config: ConfigService
+                ,public loaderService: LoaderService) {
     }
 
   ngOnInit(): void {

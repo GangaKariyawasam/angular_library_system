@@ -12,6 +12,8 @@ import {StudentProfileComponent} from "./view/student-profile/student-profile.co
 import {MainMenuGuard} from "./guards/main-menu.guard";
 import {DashboardGuard} from "./guards/dashboard.guard";
 import {StudentProfileGuard} from "./guards/student-profile.guard";
+import {HomeComponent} from "./view/dash-board/home/home.component";
+import {StudentComponent} from "./view/dash-board/student/student.component";
 
 const routes: Routes = [
   {
@@ -52,7 +54,13 @@ const routes: Routes = [
   {
     component: DashBoardComponent,
     path: 'dash-board',
-    canActivate: [DashboardGuard]
+    canActivate: [DashboardGuard],
+    children: [
+      {path: '', pathMatch: 'full', redirectTo: 'home'},
+      {path: 'home', component: HomeComponent},
+      {path: 'student', component: StudentComponent},
+      {path: '**', pathMatch:'full', redirectTo: 'home'},
+    ]
   },
   {
     component: FooterComponent,

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2'
+import {LoaderService} from "./service/loader.service";
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,7 @@ import Swal from 'sweetalert2'
 })
 export class AppComponent {
   title = 'library';
+
+  constructor(public loaderService: LoaderService) {
+  }
 }

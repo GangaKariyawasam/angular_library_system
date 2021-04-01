@@ -10,3 +10,12 @@ mdb-navbar-brand a{
   border-radius: 50px;
   border: 2px solid #5bc0de;
 }
+
+.school-badge{
+  background-image: url("../../../assets/images/ins badge.jpg");
+  background-size: contain;
+  display: inline-block;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}

@@ -85,18 +85,3 @@ mat-card{
 .book-details span{
   font-weight: bold;
 }
-
-.loader-container {
-  position: fixed;
-  width: 100%;
-  z-index: 999;
-}
-
-.loader-spinner {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background: white;
-  opacity: 0.8;
-  z-index: 999;
-}

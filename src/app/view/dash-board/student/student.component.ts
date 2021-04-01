@@ -3,17 +3,16 @@ import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {RegistrationComponent} from '../registration/registration.component';
-import {Student} from '../../model/Student'
+import {RegistrationComponent} from '../../registration/registration.component';
+import {Student} from '../../../model/Student'
 import {MatSort} from '@angular/material/sort';
 
-
 @Component({
-  selector: 'app-student-register',
-  templateUrl: './student-register.component.html',
-  styleUrls: ['./student-register.component.scss']
+  selector: 'app-student',
+  templateUrl: './student.component.html',
+  styleUrls: ['./student.component.scss']
 })
-export class StudentRegisterComponent implements OnInit {
+export class StudentComponent implements OnInit {
 
   dataSource = new MatTableDataSource<Student>(showStudents);
   displayedColumns: string[] = ['RegNo', 'Image', 'Name', 'Gender', 'Grade', 'Address', 'Contact', 'Edit'];
@@ -33,8 +32,8 @@ export class StudentRegisterComponent implements OnInit {
     showStudents.length = 0;
     for (const student of allStudents) {
       if(student.initial.trim().toLowerCase().includes(filterValue.trim().toLowerCase()) ||
-        student.fname.trim().toLowerCase().includes(filterValue.trim().toLowerCase()) ||
-        student.lname.trim().toLowerCase().includes(filterValue.trim().toLowerCase())){
+          student.fname.trim().toLowerCase().includes(filterValue.trim().toLowerCase()) ||
+          student.lname.trim().toLowerCase().includes(filterValue.trim().toLowerCase())){
         showStudents.push(student);
       }
     }
@@ -45,7 +44,7 @@ export class StudentRegisterComponent implements OnInit {
   // @ViewChild(MatSort) sort: any;
 
   ngAfterViewInit() {
-   /* this.dataSource.paginator = this.paginator;*/
+    /* this.dataSource.paginator = this.paginator;*/
     // this.dataSource.sort = this.sort;
   }
 
@@ -125,7 +124,7 @@ export class StudentRegisterComponent implements OnInit {
       this.selectedCourse = undefined;
     }
 
-}
+  }
   submitFormData(): void {
     if(this.form.valid){
       alert("Submitted form data");
@@ -171,6 +170,7 @@ export class StudentRegisterComponent implements OnInit {
   addRow() {
     alert('Add row');
   }
+
 }
 export interface Course{
   id: number,
@@ -181,4 +181,3 @@ const allStudents: Student[] = [
 ];
 const showStudents: Student[] = [
 ];
-

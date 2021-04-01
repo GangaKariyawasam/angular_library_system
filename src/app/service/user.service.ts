@@ -5,13 +5,13 @@ import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {User} from "../model/User";
 import {Router} from "@angular/router";
+import {Staff} from "../model/Staff";
+import {Student} from "../model/Student";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService{
-
-  currentLoggedUser!:User;
 
   constructor(private http: HttpClient
               ,private config:ConfigService
@@ -33,6 +33,33 @@ export class UserService{
       return throwError('Invalid token');
     }else {
       return this.http.get<User>(`http://localhost:8080/api/v1/users`);
+    }
+  }
+
+  getAdminUser(): Observable<Staff>{
+    const token = localStorage.getItem('token');
+    if(token === null){
+      return throwError('Invalid token');
+    }else {
+      return this.http.get<Staff>(`http://localhost:8080/api/v1/users/adminUser`);
+    }
+  }
+
+  getStaffUser(): Observable<Staff>{
+    const token = localStorage.getItem('token');
+    if(token === null){
+      return throwError('Invalid token');
+    }else {
+      return this.http.get<Staff>(`http://localhost:8080/api/v1/users/staffUser`);
+    }
+  }
+
+  getStudentUser(): Observable<Student>{
+    const token = localStorage.getItem('token');
+    if(token === null){
+      return throwError('Invalid token');
+    }else {
+      return this.http.get<Student>(`http://localhost:8080/api/v1/users/studentUser`);
     }
   }
 }
