@@ -11,6 +11,7 @@ import {Staff} from "../../model/Staff";
 export class DashBoardComponent implements OnInit {
 
   currentUser!: Staff;
+  currentMenu!: string
 
   constructor(public userService: UserService
               ,private router: Router) { }

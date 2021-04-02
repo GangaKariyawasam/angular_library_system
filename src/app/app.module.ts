@@ -21,7 +21,6 @@ import { MainMenuComponent } from './view/main-menu/main-menu.component';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { CoursesComponent } from './view/courses/courses.component';
-import { StudentRegisterComponent } from './view/student-register/student-register.component';
 import {MatOptionModule} from '@angular/material/core';
 import { SearchResultComponent } from './view/search-result/search-result.component';
 import {MatCardModule} from '@angular/material/card';
@@ -49,7 +48,6 @@ import { StudentComponent } from './view/dash-board/student/student.component';
     RegistrationComponent,
     MainMenuComponent,
     CoursesComponent,
-    StudentRegisterComponent,
     SearchResultComponent,
     FooterComponent,
     HighlightSearchPipe,

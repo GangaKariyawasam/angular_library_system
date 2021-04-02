@@ -1,4 +1,4 @@
-<div class="content-wrapper row table-container position-relative">
+<div class="row content-wrapper table-container position-relative">
     <div [ngClass]="buttonCount==1 ? 'overlay': ''"></div>
     <div class="col-12 mb-4">
         <div class="mat-elevation-z8">
@@ -11,37 +11,39 @@
                             </div>
                         </div>
                         <div class="row" style="font-size:14px">
-                            <div class="col-4">
-                                <mat-form-field appearance="fill"[style.width.%]=60>
+                            <div class="col-6 d-flex justify-content-center">
+                                <mat-form-field appearance="legacy"[style.width.%]=60>
                                     <input matInput (keyup)="applyFilterByRegisterNumber($event)" placeholder="Search by Registration Number" #input>
                                 </mat-form-field>
                             </div>
-                            <div class="col-4">
-                                <mat-form-field appearance="fill"[style.width.%]=60>
+                            <div class="col-6 d-flex justify-content-center">
+                                <mat-form-field appearance="legacy"[style.width.%]=60>
                                     <input matInput (keyup)="applyFilterByStudentName($event)" placeholder="Search by Name" #input>
                                 </mat-form-field>
-                            </div>
-                            <div class="col-4">
-                                <button mat-raised-button class="float-right" color="primary"(click)="openRegisterForm()">New Student</button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <table class="studentTable" mat-table [dataSource]="dataSource" matSort>
+                                <table class="studentTable" mat-table [dataSource]="studentService.dataSource" matSort>
 
                                     <div class="row">
                                         <div class="col-12">
                                             <!-- Registration Column -->
                                             <ng-container matColumnDef="RegNo">
                                                 <th mat-header-cell *matHeaderCellDef>Reg No</th>
-                                                <td mat-cell *matCellDef="let element"> {{element.registrationNo}} </td>
+                                                <td mat-cell *matCellDef="let element"> {{element.regNo}} </td>
                                             </ng-container>
 
                                             <!-- photo Column -->
                                             <ng-container matColumnDef="Image">
                                                 <th mat-header-cell *matHeaderCellDef>Image</th>
                                                 <td mat-cell *matCellDef="let element">
-                                                    <img class="studentImage img-fluid" src="{{element.image}}" alt="">
+                                                        <div class="studentImage img-fluid"
+                                                         [ngStyle]="(element.image!==null)?
+                                                         {background: 'url(http://localhost:8080/api/v1/students/image/'+element.regNo+')'}
+                                                         :(element.gender.toLowerCase()==='male')?{background: 'url(../../../../assets/img/avatar5.png)'}
+                                                         :{background: 'url(../../../../assets/img/avatar3.png)'}">
+                                                    </div>
                                                 </td>
                                             </ng-container>
 
@@ -54,13 +56,13 @@
                                             <!-- Gender Column -->
                                             <ng-container matColumnDef="Gender">
                                                 <th mat-header-cell *matHeaderCellDef>Gender</th>
-                                                <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+                                                <td mat-cell *matCellDef="let element"> {{element.gender.toLowerCase()}} </td>
                                             </ng-container>
 
                                             <!-- Class Column -->
                                             <ng-container matColumnDef="Grade">
                                                 <th mat-header-cell *matHeaderCellDef>Grade</th>
-                                                <td mat-cell *matCellDef="let element"> {{element.grade}} {{element.section}} {{element.year}}</td>
+                                                <td mat-cell *matCellDef="let element"> {{element.grades[0].grade}} {{element.grades[0].section}} {{element.grades[0].year}}</td>
                                             </ng-container>
 
                                             <!-- Address Column -->
@@ -75,23 +77,16 @@
                                                 <td mat-cell *matCellDef="let element"> {{element.contact}} </td>
                                             </ng-container>
 
-                                            <ng-container matColumnDef="Edit">
-                                                <th mat-header-cell *matHeaderCellDef></th>
-                                                <td mat-cell *matCellDef="let element">
-                                                    <button mat-icon-button><mat-icon>launch</mat-icon></button>
-                                                </td>
-                                            </ng-container>
-
                                         </div>
                                     </div>
 
                                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                    <tr [ngClass]="{'selected': selectedRow>0 && row.registrationNo==selectedRow}" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getSelectedStudent(row)"></tr>
+                                    <tr [ngClass]="{'selected': row.regNo==selectedRow}" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getSelectedStudent(row)"></tr>
 
                                 </table>
                                 <div class="row">
                                     <div class="col-12">
-                                        <mat-paginator [pageSize]="10" [pageSizeOptions]="[8, 10, 15]" [length]="studentCount" (page)="changePage($event)" showFirstLastButtons></mat-paginator>
+                                        <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[8, 10, 15]" [length]="studentCount" (page)="changePage($event)" showFirstLastButtons></mat-paginator>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -101,13 +96,7 @@
                                                 <i [ngClass]="buttonCount==0 ? 'fas fa-plus' : 'fas fa-times'"></i>
                                             </div>
                                             <ul class="fab-options">
-                                                <li *ngIf="selectedRow>0">
-                                                    <span class="fab-lable">Delete Row</span>
-                                                    <div (click)="deleteRow()" class="fab-icon-holder">
-                                                        <i class="fa fa-trash"></i>
-                                                    </div>
-                                                </li>
-                                                <li *ngIf="selectedRow>0">
+                                                <li *ngIf="selectedRow !== undefined">
                                                     <span class="fab-lable">Edit Row</span>
                                                     <div (click)="editRow()" class="fab-icon-holder">
                                                         <i class="fa fa-edit"></i>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
+import {StudentService} from '../../service/student.service';
+import {ConfigService} from "../../service/config.service";
+import {StudentComponent} from "../dash-board/student/student.component";
 
 @Component({
   selector: 'app-registration',
@@ -8,7 +11,9 @@ import {MatDialogRef} from '@angular/material/dialog';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<RegistrationComponent>) { }
+  constructor(private dialogRef: MatDialogRef<RegistrationComponent>,
+              public studentService: StudentService
+              ,private config: ConfigService) { }
 
   show = true;
   hide: any = true;
@@ -22,7 +27,6 @@ export class RegistrationComponent implements OnInit {
       this.years.push(year);
     }
   }
-
   test(): void {
     alert(this.selectedYear);
   }
@@ -43,7 +47,21 @@ export class RegistrationComponent implements OnInit {
   }
 
   submitForm() {
-    alert("Form Submitted");
-    this.onFormClose();
+    if(this.studentService.form.valid){
+      alert(JSON.stringify(this.studentService.form.value))
+      this.studentService.saveStudent(this.studentService.form.value).subscribe(value => {
+        this.studentService.students.unshift(this.studentService.form.value);
+        this.studentService.dataSource.data = this.studentService.students;
+        this.config.toastMixin.fire({
+          icon: 'success',
+          title: 'Successfully saved the student'
+        });
+      },error => {
+        this.config.toastMixin.fire({
+          icon: 'error',
+          title: 'Failed to save the student'
+        });
+      })
+    }
   }
 }

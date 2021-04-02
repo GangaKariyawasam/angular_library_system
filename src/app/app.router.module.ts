@@ -5,7 +5,6 @@ import {CoursesComponent} from './view/courses/courses.component';
 import {LogInComponent} from './view/log-in/log-in.component';
 import {RegistrationComponent} from './view/registration/registration.component';
 import {SearchResultComponent} from './view/search-result/search-result.component';
-import {StudentRegisterComponent} from './view/student-register/student-register.component';
 import {DashBoardComponent} from './view/dash-board/dash-board.component';
 import {FooterComponent} from "./view/footer/footer.component";
 import {StudentProfileComponent} from "./view/student-profile/student-profile.component";
@@ -41,10 +40,6 @@ const routes: Routes = [
   {
     component: SearchResultComponent,
     path: 'search-book'
-  },
-  {
-    component: StudentRegisterComponent,
-    path: 'student-register'
   },
   {
     component: StudentProfileComponent,

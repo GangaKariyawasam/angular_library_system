@@ -166,7 +166,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item menu-open">
-                            <a [routerLink]="'home'" class="nav-link active">
+                            <a [routerLink]="'home'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -174,7 +174,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a class="nav-link" [routerLink]="'test'" routerLinkActive="active">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Book Management
@@ -183,7 +183,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a [routerLink]="'student'" class="nav-link">
+                                    <a class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>All Books</p>
                                     </a>
@@ -197,7 +197,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a [ngClass]="currentMenu === 'student' ? 'active nav-link' : 'nav-link'">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Student Management
@@ -206,13 +206,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a [routerLink]="'student'" class="nav-link">
+                                    <a [routerLink]="'student'" routerLinkActive="active" class="nav-link" (click)="currentMenu = 'student'">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>All Student</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/top-nav.html" class="nav-link">
+                                    <a href="pages/layout/top-nav.html" class="nav-link" (click)="currentMenu = 'student'">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Add Student</p>
                                     </a>
@@ -229,7 +229,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a [routerLink]="'student'" class="nav-link">
+                                    <a class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>All Staff</p>
                                     </a>
@@ -627,11 +627,7 @@
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="row">
-            <div class="col-12">
-                <router-outlet></router-outlet>
-            </div>
-        </div>
+        <router-outlet></router-outlet>
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
