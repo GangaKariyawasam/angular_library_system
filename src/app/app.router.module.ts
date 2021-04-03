@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {MainMenuComponent} from './view/main-menu/main-menu.component';
-import {CoursesComponent} from './view/courses/courses.component';
-import {LogInComponent} from './view/log-in/log-in.component';
-import {RegistrationComponent} from './view/registration/registration.component';
+import {StudentRegistrationComponent} from './view/dash-board/student-registration/student-registration.component';
 import {SearchResultComponent} from './view/search-result/search-result.component';
 import {DashBoardComponent} from './view/dash-board/dash-board.component';
 import {FooterComponent} from "./view/footer/footer.component";
@@ -26,16 +24,8 @@ const routes: Routes = [
     canActivate: [MainMenuGuard]
   },
   {
-    component: CoursesComponent,
-    path: 'courses'
-  },
-  {
-    component: LogInComponent,
-    path: 'log-in'
-  },
-  {
-    component: RegistrationComponent,
-    path: 'registration'
+    component: StudentRegistrationComponent,
+    path: 'student-registration'
   },
   {
     component: SearchResultComponent,

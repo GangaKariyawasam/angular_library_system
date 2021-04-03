@@ -3,7 +3,7 @@ import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {RegistrationComponent} from '../../registration/registration.component';
+import {StudentRegistrationComponent} from '../student-registration/student-registration.component';
 import {Student} from '../../../model/Student'
 import {StudentService} from "../../../service/student.service";
 import {ConfigService} from "../../../service/config.service";
@@ -88,7 +88,7 @@ export class StudentComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    this.dialog.open(RegistrationComponent,dialogConfig);
+    this.dialog.open(StudentRegistrationComponent,dialogConfig);
   }
 
   changePage(event: PageEvent) {
@@ -121,7 +121,7 @@ export class StudentComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    this.dialog.open(RegistrationComponent,dialogConfig);
+    this.dialog.open(StudentRegistrationComponent,dialogConfig);
   }
 
   addRow() {

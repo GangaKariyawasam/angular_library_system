@@ -25,11 +25,11 @@ export class StudentService {
     firstStreet: new FormControl('',[Validators.required,Validators.minLength(3)]),
     secondStreet: new FormControl('',[Validators.required,Validators.minLength(3)]),
     town: new FormControl('',[Validators.minLength(3)]),
-    gender: new FormControl('1',[Validators.required]),
+    gender: new FormControl('male',[Validators.required]),
     contact: new FormControl('',[Validators.minLength(10),Validators.maxLength(10),Validators.pattern('^0[1-9][0-9]{8}$')]),
-    year: new FormControl([Validators.required]),
-    grade: new FormControl('',[Validators.required]),
-    section: new FormControl([Validators.required]),
+    active: new FormControl(true,[Validators.required]),
+    role: new FormControl('STUDENT',[Validators.required]),
+    grades: new FormControl([],[Validators.required]),
     image: new FormControl('')
   });
 
@@ -46,12 +46,13 @@ export class StudentService {
       town: '',
       gender: 'male',
       contact: '',
-      year: new Date().getFullYear(),
-      grade: '',
-      section: 1,
+      active: true,
+      role: 'STUDENT',
+      grades: [],
       image: ''
     });
     this.form.controls['regNo'].enable();
+    this.form.controls['active'].disable();
   }
 
   populateForm(student: Student){
@@ -67,12 +68,13 @@ export class StudentService {
       town: student.town,
       gender: student.gender.toLowerCase(),
       contact: student.contact,
-      year: student.grades[0].year,
-      grade: student.grades[0].grade,
-      section: student.grades[0].section,
+      active: student.active,
+      role: 'STUDENT',
+      grades: student.grades,
       image: student.image
     });
     this.form.controls['regNo'].disable();
+    this.form.controls['active'].enable();
   }
   get registerFormControl(){
     return this.form.controls;

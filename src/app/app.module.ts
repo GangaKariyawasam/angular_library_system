@@ -15,12 +15,10 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
-import {LogInComponent} from './view/log-in/log-in.component';
-import { RegistrationComponent } from './view/registration/registration.component';
+import { StudentRegistrationComponent } from './view/dash-board/student-registration/student-registration.component';
 import { MainMenuComponent } from './view/main-menu/main-menu.component';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { CoursesComponent } from './view/courses/courses.component';
 import {MatOptionModule} from '@angular/material/core';
 import { SearchResultComponent } from './view/search-result/search-result.component';
 import {MatCardModule} from '@angular/material/card';
@@ -39,15 +37,15 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { DashBoardComponent } from './view/dash-board/dash-board.component';
 import { HomeComponent } from './view/dash-board/home/home.component';
 import { StudentComponent } from './view/dash-board/student/student.component';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LogInComponent,
-    RegistrationComponent,
+    StudentRegistrationComponent,
     MainMenuComponent,
-    CoursesComponent,
     SearchResultComponent,
     FooterComponent,
     HighlightSearchPipe,
@@ -82,6 +80,8 @@ import { StudentComponent } from './view/dash-board/student/student.component';
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    MatSlideToggleModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [BookService,
     {
@@ -97,7 +97,7 @@ import { StudentComponent } from './view/dash-board/student/student.component';
     ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [RegistrationComponent]
+  entryComponents: [StudentRegistrationComponent]
 })
 export class AppModule { }
 
