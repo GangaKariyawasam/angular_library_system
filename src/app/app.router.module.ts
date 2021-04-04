@@ -11,7 +11,8 @@ import {DashboardGuard} from "./guards/dashboard.guard";
 import {StudentProfileGuard} from "./guards/student-profile.guard";
 import {HomeComponent} from "./view/dash-board/home/home.component";
 import {StudentComponent} from "./view/dash-board/student/student.component";
-
+import { BookRegistrationComponent } from './view/dash-board/book-registration/book-registration.component';
+import {AuthorRegistrationComponent} from "./view/author-registration/author-registration.component";
 const routes: Routes = [
   {
     path: '',
@@ -24,8 +25,16 @@ const routes: Routes = [
     canActivate: [MainMenuGuard]
   },
   {
+    component: BookRegistrationComponent,
+    path: 'book-registration'
+  },
+  {
     component: StudentRegistrationComponent,
     path: 'student-registration'
+  },
+  {
+    component: AuthorRegistrationComponent,
+    path: 'author-registration'
   },
   {
     component: SearchResultComponent,

@@ -12,7 +12,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {MatTableModule} from '@angular/material/table';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { StudentRegistrationComponent } from './view/dash-board/student-registration/student-registration.component';
@@ -39,6 +39,8 @@ import { HomeComponent } from './view/dash-board/home/home.component';
 import { StudentComponent } from './view/dash-board/student/student.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { BookRegistrationComponent } from './view/dash-board/book-registration/book-registration.component';
+import { AuthorRegistrationComponent } from './view/author-registration/author-registration.component';
 
 
 @NgModule({
@@ -53,6 +55,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     DashBoardComponent,
     HomeComponent,
     StudentComponent,
+    BookRegistrationComponent,
+    AuthorRegistrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +98,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
       useClass:TokenInterceptorService,
       multi:true
     },
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    }
     ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
