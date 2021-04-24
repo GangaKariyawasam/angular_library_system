@@ -10,6 +10,8 @@ import {ConfigService} from "./config.service";
 })
 export class BookService {
 
+  selectedBook!: BookCustom;
+
   constructor(private http:HttpClient,private config: ConfigService) { }
 
   searchBookByName(searchKey: string,pageSize: string, pageIndex: string):Observable<Array<BookCustom>>{

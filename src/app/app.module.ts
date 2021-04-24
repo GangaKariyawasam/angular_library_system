@@ -41,6 +41,12 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BookRegistrationComponent } from './view/dash-board/book-registration/book-registration.component';
 import { AuthorRegistrationComponent } from './view/author-registration/author-registration.component';
+import {MatBottomSheet, MatBottomSheetModule, MatBottomSheetRef} from "@angular/material/bottom-sheet";
+import {AddCartWithLogginComponent} from "./view/search-result/add-cart-with-loggin/add-cart-with-loggin.component";
+import {MatTabsModule} from "@angular/material/tabs";
+import {SupplierRegistrationComponent} from "./view/dash-board/book-registration/supplier-registration/supplier-registration.component";
+import { RackRegistrationComponent } from './view/dash-board/book-registration/rack-registration/rack-registration.component';
+
 
 
 @NgModule({
@@ -57,6 +63,9 @@ import { AuthorRegistrationComponent } from './view/author-registration/author-r
     StudentComponent,
     BookRegistrationComponent,
     AuthorRegistrationComponent,
+    AddCartWithLogginComponent,
+    SupplierRegistrationComponent,
+    RackRegistrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,6 +95,8 @@ import { AuthorRegistrationComponent } from './view/author-registration/author-r
     MatProgressBarModule,
     MatSlideToggleModule,
     NgMultiSelectDropDownModule.forRoot(),
+    MatBottomSheetModule,
+    MatTabsModule,
   ],
   providers: [BookService,
     {
@@ -105,7 +116,7 @@ import { AuthorRegistrationComponent } from './view/author-registration/author-r
     ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [StudentRegistrationComponent]
+  entryComponents: [StudentRegistrationComponent,AuthorRegistrationComponent]
 })
 export class AppModule { }
 

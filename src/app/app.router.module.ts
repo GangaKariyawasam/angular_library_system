@@ -25,16 +25,8 @@ const routes: Routes = [
     canActivate: [MainMenuGuard]
   },
   {
-    component: BookRegistrationComponent,
-    path: 'book-registration'
-  },
-  {
     component: StudentRegistrationComponent,
     path: 'student-registration'
-  },
-  {
-    component: AuthorRegistrationComponent,
-    path: 'author-registration'
   },
   {
     component: SearchResultComponent,
@@ -45,6 +37,7 @@ const routes: Routes = [
     path: 'student-profile',
     canActivate: [StudentProfileGuard]
   },
+  {path: 'book-registration',component: BookRegistrationComponent},
   {
     component: DashBoardComponent,
     path: 'dash-board',
@@ -53,6 +46,7 @@ const routes: Routes = [
       {path: '', pathMatch: 'full', redirectTo: 'home'},
       {path: 'home', component: HomeComponent},
       {path: 'student', component: StudentComponent},
+      {path: 'book-registration',component: BookRegistrationComponent},
       {path: '**', pathMatch:'full', redirectTo: 'home'},
     ]
   },
@@ -62,7 +56,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/log-in'
+    redirectTo: '/main'
   }
 ]
 

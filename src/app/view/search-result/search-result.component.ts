@@ -5,6 +5,9 @@ import {BookService} from "../../service/book.service";
 import {LoaderService} from "../../service/loader.service";
 import Swal from "sweetalert2";
 import {ConfigService} from "../../service/config.service";
+import {AuthorRegistrationComponent} from "../author-registration/author-registration.component";
+import {MatBottomSheet} from "@angular/material/bottom-sheet";
+import {AddCartWithLogginComponent} from "./add-cart-with-loggin/add-cart-with-loggin.component";
 
 @Component({
   selector: 'app-search-result',
@@ -25,7 +28,8 @@ export class SearchResultComponent implements OnInit{
   panelOpenState = false;
 
   constructor(private bookService: BookService,public loaderService: LoaderService,
-              private config: ConfigService) { }
+              private config: ConfigService
+              ,public bottomSheet: MatBottomSheet) { }
 
 
   ngOnInit(): void {
@@ -100,6 +104,11 @@ export class SearchResultComponent implements OnInit{
   onSearchCloseButton() {
     (this.searchValue.nativeElement as HTMLInputElement).value = '';
     this.clearSearch((this.searchValue.nativeElement as HTMLInputElement).value);
+  }
+
+  openBottomSheet(bookCustom: BookCustom): void {
+    this.bookService.selectedBook = bookCustom;
+    this.bottomSheet.open(AddCartWithLogginComponent);
   }
 }
 

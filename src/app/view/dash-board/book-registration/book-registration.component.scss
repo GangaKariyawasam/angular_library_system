@@ -71,23 +71,25 @@
   }
 }
 .btn-dialog-close{
-  position: absolute;
-  top: -20px;
-  right: -15px;
   width: 30px;
-  min-width: 0px;
   height: 30px;
-  padding: 0px;
   text-align: center;
-  background-color: darkseagreen;
+  background: none;
+  border-radius: 50%;
+  border: none;
 
   &:hover{
-    background-color: red;
-    width: 42px;
-    height: 42px;
+    background-color: darkseagreen;
   }
 }
 .btn-dialog-close mat-icon{
-  justify-content: center;;
+  justify-content: center;
   text-align: center;
+}
+
+.tick {
+  background: url("../../../../assets/images/tick.gif");
+  height: 40px;
+  width: 40px;
+  background-size: cover;
 }
